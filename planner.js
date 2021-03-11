@@ -35,6 +35,8 @@ function buildPlanner() {
         var textarea = document.createElement("textarea")
         //Gave text area a class
         textarea.classList.add("col-md-10", "toDo")
+        var newString = hours[i] + "-textarea"
+        textarea.setAttribute("id", newString)
         // Variable to parse the hours
         let hourToAdd = parseInt(hours[i]);
         //
@@ -63,11 +65,20 @@ function buildPlanner() {
         var iTag = document.createElement("i")
         iTag.classList.add("fas", "fa-save")
         //Appending iTag to save button
+        saveButton.addEventListener("click", (event) => {
+            event.preventDefault();
+           console.log("save button");
+        var newString = hours[i] + "-textarea";
+        var textAreaValue = document.getElementById(newString);
+           console.log(textAreaValue);
+       })
         saveButton.appendChild(iTag)
         //Appending saveButton to row
         row.appendChild(saveButton)
         //Grabbing the id of planner and appending it to row
         document.getElementById("planner").appendChild(row)
+        
+        
     }
 }
 
