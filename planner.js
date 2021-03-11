@@ -1,9 +1,10 @@
 console.log("helloworld")
-
- document.getElementById("currentDay").textContent=  moment().format('dddd');
+var hours = ["9am","10am","11am","12pm","1pm","2pm","3pm","4pm","5pm"]
+ 
+document.getElementById("currentDay").textContent=  moment().format('dddd');
 
  function buildPlanner(){
-    var hours = ["9am","10am","11am","12pm","1pm","2pm","3pm","4pm","5pm"] 
+    
     for (var i=0; i<hours.length; i++){
        
         var row = document.createElement("div")
@@ -23,6 +24,7 @@ console.log("helloworld")
         iTag.classList.add("fas","fa-save")
         saveButton.appendChild(iTag)
         row.appendChild(saveButton)
+        
       
       
       
@@ -30,5 +32,15 @@ console.log("helloworld")
         document.getElementById("planner").appendChild(row)
      }
  }
+
+
+function colorCode(){
+    console.log(hours)
+}
+
+ function getHour() {
+     return moment().hour();
+ }
+
 
  buildPlanner()
