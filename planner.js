@@ -37,6 +37,9 @@ function buildPlanner() {
         textarea.classList.add("col-md-10", "toDo")
         var newString = hours[i] + "-textarea"
         textarea.setAttribute("id", newString)
+        if (localStorage.getItem(newString)) {
+            textarea.innerHTML = localStorage.getItem(newString);
+        }
         // Variable to parse the hours
         let hourToAdd = parseInt(hours[i]);
         //
@@ -67,10 +70,20 @@ function buildPlanner() {
         //Appending iTag to save button
         saveButton.addEventListener("click", (event) => {
             event.preventDefault();
-           console.log("save button");
-        var newString = hours[i] + "-textarea";
-        var textAreaValue = document.getElementById(newString);
-           console.log(textAreaValue);
+           // target = what specific element triggered the function
+           const buttonThatTriggeredClickEvent = event.target;
+           // previousSibling is the html element directly about the button you clicked to trigger this function
+           const textareaSibling = buttonThatTriggeredClickEvent.previousSibling;
+           const textareaId = textareaSibling.getAttribute('id');
+           console.log(textareaSibling.value, textareaId);
+           // check if the textarea had a value. if so, add to localStorage
+           if (textareaSibling.value !== "") {
+                localStorage.setItem(textareaId, textareaSibling.value);
+           } 
+           
+           else {
+                 localStorage.removeItem(textareaId)
+           }
        })
         saveButton.appendChild(iTag)
         //Appending saveButton to row
